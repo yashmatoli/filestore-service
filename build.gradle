@@ -1,0 +1,46 @@
+buildscript {
+   ext {
+      springBootVersion = '1.5.9.RELEASE'
+   }
+   repositories {
+      mavenCentral()
+   }
+   dependencies {
+      classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+      classpath('se.transmode.gradle:gradle-docker:1.2')
+   }
+}
+
+group = 'com.example'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'docker'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+   mavenCentral()
+}
+dependencies {
+   compile('org.springframework.boot:spring-boot-starter-web')
+   testCompile('org.springframework.boot:spring-boot-starter-test')
+   compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+   compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.0.2'
+   testCompile group: 'org.mockito', name: 'mockito-core', version: '3.5.10'
+   testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.5.10'
+   testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.0-M1'
+   testRuntime("org.junit.jupiter:junit-jupiter-engine:5.6.0-M1")
+   testRuntime("org.junit.platform:junit-platform-runner:1.5.2")
+   testImplementation "org.junit.jupiter:junit-jupiter-params:5.6.0-M1"
+   testImplementation "org.powermock:powermock-module-junit4:2.0.2"
+   testImplementation "org.powermock:powermock-api-mockito2:2.0.2"
+}
+
+test {
+useJUnitPlatform()
+testLogging.showStandardStreams = true
+}

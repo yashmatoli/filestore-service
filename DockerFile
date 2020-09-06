@@ -1,0 +1,8 @@
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+##EXPOSE 8084
+ARG JAR_FILE=build/libs/*.jar
+ADD ${JAR_FILE} filestore-service.jar
+
+# Run the jar file 
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/filestore-service.jar"]

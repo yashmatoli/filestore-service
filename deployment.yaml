@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: filestore-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: filestore-service
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filestore-service
+spec:
+  selector:
+    matchLabels:
+      app: filestore-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: filestore-service
+    spec:
+      containers:
+      - name: filestore-service
+        image: <docker_user_name>/<docker_repo_name>:latest
+        ports:
+          - containerPort: 8080
